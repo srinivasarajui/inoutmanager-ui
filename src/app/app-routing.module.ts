@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'enroll',
     component: UserEnrollComponent
   },
-  { path: '',   redirectTo: '/inout', pathMatch: 'full' }
+  { path: '',   redirectTo: '/enroll', pathMatch: 'full' }
 ];
 
 @NgModule({

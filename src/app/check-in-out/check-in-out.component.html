@@ -1,3 +1,4 @@
 <p>
-  check-in-out works!
+  <ack-webcam [(ref)]="webcam" [options]="options" (onSuccess)="onCamSuccess($event)" (onError)="onCamError($event)"></ack-webcam>
+  <button (click)="genPostData()"> generate post data </button>
 </p>
