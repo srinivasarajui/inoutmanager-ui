@@ -1,5 +1,6 @@
+import { DataService, Employee } from './../data/data.service';
 import { Component, OnInit } from '@angular/core';
-
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'iom-user-enroll',
   templateUrl: './user-enroll.component.html',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserEnrollComponent implements OnInit {
 
-  constructor() { }
+  employees$: Observable<Employee[]>;
+  constructor(private dataService: DataService) {
+    this.employees$ = dataService.getEmployeesList();
+  }
 
   ngOnInit() {
   }

@@ -1,11 +1,23 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <mat-toolbar color="primary">
-    <span>In/Out Manager</span>
-    
-      <!-- This fills the remaining space of the current row -->
-      <span class="fill-remaining-space"></span>
-    
-      <div>Right Aligned Text</div>
+  <span>In/Out Manager</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+
+  <div>
+    <a mat-icon-button routerLink="/dashboard" routerLinkActive="active">
+      <mat-icon aria-label="Dashboard">dashboard</mat-icon>
+    </a>
+    <a mat-icon-button routerLink="/empList" routerLinkActive="active">
+      <mat-icon aria-label="manage accounts">account_box</mat-icon>
+    </a>
+    <a mat-icon-button routerLink="/inout" routerLinkActive="active">
+      <mat-icon aria-label="In & Out">swap_horiz</mat-icon>
+    </a>
+  </div>
+
+
 
 </mat-toolbar>
 <router-outlet></router-outlet>

@@ -1,3 +1,24 @@
-<p>
-  user-enroll works!
-</p>
+
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile  *ngFor="let employee of employees$ | async"> 
+      <mat-card class="employeeCard">
+        <mat-card-title>
+          {{employee.name}}
+        </mat-card-title>
+        <mat-card-content>
+           Emp Id: {{employee.empid}}
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-icon-button>  
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button>  
+                <mat-icon aria-label="delete">delete</mat-icon>
+              </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <a mat-fab routerLink="/EmpAdd">
+      <mat-icon aria-label="Add employee">add</mat-icon>
+  </a>

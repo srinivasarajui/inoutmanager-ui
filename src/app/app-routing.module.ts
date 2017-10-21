@@ -1,3 +1,4 @@
+import { EmpEditComponent } from './emp-edit/emp-edit.component';
 import { UserEnrollComponent } from './user-enroll/user-enroll.component';
 import { CheckInOutComponent } from './check-in-out/check-in-out.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,10 +15,14 @@ const routes: Routes = [
     component: CheckInOutComponent
   },
   {
-    path: 'enroll',
+    path: 'empList',
     component: UserEnrollComponent
   },
-  { path: '',   redirectTo: '/enroll', pathMatch: 'full' }
+  {
+    path: 'EmpAdd',
+    component: EmpEditComponent
+  },
+  { path: '',   redirectTo: '/EmpAdd', pathMatch: 'full' }
 ];
 
 @NgModule({

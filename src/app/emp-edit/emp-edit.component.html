@@ -1,0 +1,8 @@
+<mat-form-field >
+    <input matInput id="name" name="name" type="text" placeholder="Employee Name" [(ngModel)]="employee.name">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput name="empid" type="text" placeholder="Employee ID " [(ngModel)]="employee.empid">
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="save()" type='button'>Save</button>
+<button mat-raised-button (click)="cancel()" type='button'>Cancel</button>
