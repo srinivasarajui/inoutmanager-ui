@@ -1,3 +1,4 @@
+import { FaceDetectService } from './../face-detect/face-detect.service';
 import { DataService, Employee } from './../data/data.service';
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
@@ -20,13 +21,18 @@ export class EmpEditComponent implements OnInit {
     cameraType: 'front' || 'back'
   };
   employee: Employee;
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(private dataService: DataService, private router: Router, private faceDS: FaceDetectService) {}
 
   ngOnInit() {
     this.dataService.currentEmployee.subscribe(emp => this.employee = emp);
   }
   save() {
-    this.dataService.save(this.employee);
+    this.employee.photosList.forEach( item => {
+      this.faceDS.enrollEmployee(this.employee.empid, item)
+      .then( () => console.log('enrolled'))
+      .catch( error => console.log(JSON.stringify(error)));
+    });
+    this.dataService.save({...this.employee, photosList : []});
     this.router.navigate(['/empList']);
   }
   addPhotoToList() {

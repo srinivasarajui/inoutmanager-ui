@@ -1,4 +1,5 @@
 <p>
-  <ack-webcam [(ref)]="webcam" [options]="options" (onSuccess)="onCamSuccess($event)" (onError)="onCamError($event)"></ack-webcam>
-  <button (click)="genPostData()"> generate post data </button>
+  <ack-webcam [(ref)]="webcam" [options]="options" ></ack-webcam>
+  <button (click)="checkEmp()"> generate post data </button>
+  {{userid}}
 </p>

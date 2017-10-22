@@ -3,13 +3,12 @@
     <mat-grid-tile  *ngFor="let employee of employees$ | async; let i=index"> 
       <mat-card class="employeeCard">
         <mat-card-title>
-          # {{i}}
+          {{employee.name}}
         </mat-card-title>
         <mat-card-content>
            Emp Id: {{employee.empid}}
         </mat-card-content>
-        <img mat-card-image [src]="employee.photo"  width="100px" >
-        <mat-card-actions>
+         <mat-card-actions>
             <button mat-icon-button>  
               <mat-icon aria-label="Edit"  (click)="edit(employee)" >edit</mat-icon>
             </button>

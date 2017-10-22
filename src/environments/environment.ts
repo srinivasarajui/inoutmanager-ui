@@ -12,5 +12,9 @@ export const environment = {
     projectId: `newagent-gayibp`,
     storageBucket: `newagent-gayibp.appspot.com`,
     messagingSenderId: `612899790435`
+  },
+  kairos: {
+    appId: `0e50c860`,
+    appKey: `bd72d5db5096ec99a040148fc211f71f`,
   }
 };

@@ -1,8 +1,10 @@
+import { FaceDetectService } from './face-detect/face-detect.service';
 import { DataService } from './data/data.service';
 import { MaterialModule } from './material.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { WebCamComponent } from 'ack-angular-webcam';
@@ -25,14 +27,16 @@ import { EmpEditComponent } from './emp-edit/emp-edit.component';
     EmpEditComponent,
   ],
   imports: [
-    BrowserModule, FormsModule,
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
-  providers: [DataService],
+  providers: [DataService, FaceDetectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

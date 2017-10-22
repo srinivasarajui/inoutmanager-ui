@@ -1,3 +1,4 @@
+import { FaceDetectService } from './../face-detect/face-detect.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckInOutComponent implements OnInit {
   public webcam;
+  userid: string;
   public options = {
     audio: false,
     video: true,
@@ -17,21 +19,27 @@ export class CheckInOutComponent implements OnInit {
     fallbackQuality: 85,
     cameraType: 'front' || 'back'
   };
-  constructor() { }
+  constructor( private faceDS: FaceDetectService) {
+    this.userid = null;
+  }
 
   ngOnInit() {
   }
 
-  genPostData() {
-    this.webcam.captureAsFormData({fileName: 'file.jpg'})
-    .then( formData => console.log(formData) )
+  checkEmp() {
+    console.log('started');
+    this.webcam.getBase64()
+    .then( base => {
+      this.faceDS.detectEmployee(base)
+      .then( obj => {
+                      const object = obj as any;
+                      console.log(JSON.stringify(object));
+                      this.userid = 'Hi ' + object.images[0].candidates[0].subject_id;
+                    }
+          )
+      .catch( e => console.log(JSON.stringify(e)));
+    })
     .catch( e => console.error(e) );
   }
-  onCamSuccess($event) {
-    console.log($event);
-  }
-  onCamError($event) {
-    console.log($event);
-  }
+ }
 
-}
