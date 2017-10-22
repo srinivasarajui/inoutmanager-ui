@@ -1,22 +1,40 @@
 import { DataService, Employee } from './../data/data.service';
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'iom-emp-edit',
   templateUrl: './emp-edit.component.html',
   styleUrls: ['./emp-edit.component.css']
 })
 export class EmpEditComponent implements OnInit {
+  public webcam;
+  public options = {
+    audio: false,
+    video: true,
+    width: 500,
+    height: 500,
+    fallbackMode: 'callback',
+    fallbackSrc: 'jscam_canvas_only.swf',
+    fallbackQuality: 85,
+    cameraType: 'front' || 'back'
+  };
   employee: Employee;
-  constructor(private dataService: DataService) {
-    this.employee = {name: '', empid: '', id: null, profilePic: null};
-   }
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit() {
+    this.dataService.currentEmployee.subscribe(emp => this.employee = emp);
   }
   save() {
-    console.log(JSON.stringify(this.employee));
     this.dataService.save(this.employee);
+    this.router.navigate(['/empList']);
+  }
+  addPhotoToList() {
+    this.webcam.getBase64()
+    .then( base => {
+      this.employee = {...this.employee, photosList: [...this.employee.photosList, base] };
+    })
+    .catch( e => console.error(e) );
   }
 
 }

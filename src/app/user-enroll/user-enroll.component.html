@@ -1,24 +1,26 @@
 
-  <mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile  *ngFor="let employee of employees$ | async"> 
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile  *ngFor="let employee of employees$ | async; let i=index"> 
       <mat-card class="employeeCard">
         <mat-card-title>
-          {{employee.name}}
+          # {{i}}
         </mat-card-title>
         <mat-card-content>
            Emp Id: {{employee.empid}}
         </mat-card-content>
+        <img mat-card-image [src]="employee.photo"  width="100px" >
         <mat-card-actions>
             <button mat-icon-button>  
-              <mat-icon aria-label="Edit">edit</mat-icon>
+              <mat-icon aria-label="Edit"  (click)="edit(employee)" >edit</mat-icon>
             </button>
-            <button mat-icon-button>  
+            <button mat-icon-button (click)="delete(employee)" type='button'>  
                 <mat-icon aria-label="delete">delete</mat-icon>
               </button>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-  <a mat-fab routerLink="/EmpAdd">
+  <button mat-fab (click)="newEmp()" type='button'>  
       <mat-icon aria-label="Add employee">add</mat-icon>
-  </a>
+    </button>
+ 

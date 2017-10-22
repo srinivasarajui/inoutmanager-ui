@@ -1,8 +1,16 @@
-<mat-form-field >
-    <input matInput id="name" name="name" type="text" placeholder="Employee Name" [(ngModel)]="employee.name">
-    </mat-form-field>
-    <mat-form-field >
-      <input matInput name="empid" type="text" placeholder="Employee ID " [(ngModel)]="employee.empid">
+<mat-form-field>
+  <input matInput id="name" name="name" type="text" placeholder="Employee Name" [(ngModel)]="employee.name">
 </mat-form-field>
+<mat-form-field>
+  <input matInput name="empid" type="text" placeholder="Employee ID " [(ngModel)]="employee.empid">
+</mat-form-field>
+<ack-webcam [(ref)]="webcam" [options]="options"></ack-webcam>
+<button mat-raised-button (click)="addPhotoToList()" type='button'>Capture Photo </button>
+<mat-grid-list cols="1" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let photo of employee.photosList">
+    <img [src]="photo" css="imageList">
+  </mat-grid-tile>
+</mat-grid-list>
+
 <button mat-raised-button color="primary" (click)="save()" type='button'>Save</button>
 <button mat-raised-button (click)="cancel()" type='button'>Cancel</button>
