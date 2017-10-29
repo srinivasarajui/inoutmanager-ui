@@ -6,6 +6,7 @@ import {
     MatGridListModule,
     MatCardModule,
     MatInputModule,
+    MatListModule,
 } from '@angular/material';
 
 const usedModules = [
@@ -15,6 +16,7 @@ const usedModules = [
     MatGridListModule,
     MatCardModule,
     MatInputModule,
+    MatListModule,
 ];
 @NgModule({
   imports: usedModules,

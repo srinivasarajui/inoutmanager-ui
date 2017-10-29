@@ -1,14 +1,16 @@
 
 import { Injectable, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection  } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import * as firebase from 'firebase';
 
 export interface Employee {
   id?: string;
   name: string;
   empid: string;
   photo?: string;
+  photosListURLs?: string[];
   photosList?: string[];
 }
 
@@ -24,12 +26,18 @@ export class DataService {
     this.employeeCollection = db.collection<Employee>('employees');
     this.getEmpObserable();
    }
+   private async putFile(photo: string, path: string) {
+    const storageRef = firebase.storage().ref();
+    const iRef  = storageRef.child(`${this.basePath}/${path}`);
+    await iRef.putString(photo.substr(22), 'base64');
+    return iRef.getDownloadURL();
+   }
    getEmpObserable() {
     this.employeeList$ = this.employeeCollection.snapshotChanges().map(actions => {
       return actions.map(action => {
         const data = action.payload.doc.data() as Employee;
         const id = action.payload.doc.id;
-        const photo = data && data.photosList.length > 0 ? data.photosList[0] : null;
+        const photo = data && data.photosListURLs.length > 0 ? data.photosListURLs[0] : null;
         return { id, photo, ...data };
       });
     });
@@ -47,13 +55,31 @@ export class DataService {
   delete(item: Employee) {
     this.employeeCollection.doc(item.id).delete();
   }
-  save(item: Employee) {
+  async save(item: Employee) {
 
     if (item.id) {
       this.employeeCollection.doc(item.id).update(item);
     } else {
-      this.employeeCollection.add(item);
-      console.log('created' + item.name);
+      const phototList: string[] = [];
+      try {
+        await Promise.all(item.photosList.map(
+          async (element, index) => {
+            console.log(index);
+            try {
+              const path = await this.putFile(element, item.empid + '/' + index);
+              console.log(path);
+              phototList.push(path);
+            } catch (error) {
+              console.log(JSON.stringify(error));
+            }
+
+          }
+        ));
+        this.employeeCollection.add({...item, photosListURLs: phototList});
+        console.log('created' + item.name);
+      } catch (error) {
+        console.log(JSON.stringify(error));
+      }
     }
     this.getEmpObserable();
     this.changeEmployee(null);

@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'EmpAdd',
     component: EmpEditComponent
   },
-  { path: '',   redirectTo: '/EmpAdd', pathMatch: 'full' }
+  { path: '',   redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({

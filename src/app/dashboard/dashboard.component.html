@@ -1,3 +1,12 @@
 <p>
   dashboard works!
 </p>
+<mat-list>
+  <mat-list-item *ngFor="let employee of employees$ | async; let i=index">
+   <!-- <img matListAvatar src="..." alt="avatar"> -->
+    <h3 matLine> {{employee.name}} </h3>
+    <p matLine>
+      <span>Emp Id: {{employee.empid}} </span>
+    </p>
+  </mat-list-item>
+</mat-list>

@@ -27,12 +27,12 @@ export class EmpEditComponent implements OnInit {
     this.dataService.currentEmployee.subscribe(emp => this.employee = emp);
   }
   save() {
-    this.employee.photosList.forEach( item => {
+    /*this.employee.photosList.forEach( item => {
       this.faceDS.enrollEmployee(this.employee.empid, item)
       .then( () => console.log('enrolled'))
       .catch( error => console.log(JSON.stringify(error)));
-    });
-    this.dataService.save({...this.employee, photosList : []});
+    });*/
+    this.dataService.save(this.employee);
     this.router.navigate(['/empList']);
   }
   addPhotoToList() {
