@@ -75,7 +75,7 @@ export class DataService {
 
           }
         ));
-        this.employeeCollection.add({...item, photosListURLs: phototList});
+        this.employeeCollection.add({...item, photosList: [], photosListURLs: phototList});
         console.log('created' + item.name);
       } catch (error) {
         console.log(JSON.stringify(error));

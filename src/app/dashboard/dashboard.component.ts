@@ -17,7 +17,5 @@ export class DashboardComponent implements OnInit {
     this.dataService.changeEmployee(null);
     this.employees$ = this.dataService.getEmployeesList();
   }
- 
- 
 
 }
